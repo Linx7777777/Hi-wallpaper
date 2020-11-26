@@ -1,5 +1,4 @@
-QT += core gui network
-
+QT += core gui network concurrent dbus
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = wallpapermaker
@@ -9,9 +8,11 @@ PKGCONFIG += dtkwidget
 
 SOURCES += \
         main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    pictureitem.cpp
 
 RESOURCES +=         resources.qrc
 
 HEADERS += \
-    mainwindow.h
+    mainwindow.h \
+    pictureitem.h

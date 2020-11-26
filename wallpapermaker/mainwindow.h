@@ -7,6 +7,10 @@
 #include <DFrame>
 #include <DPushButton>
 #include <DLabel>
+#include <QGraphicsPixmapItem>
+#include <QGraphicsScene>
+#include <QGraphicsView>
+#include "pictureitem.h"
 DWIDGET_BEGIN_NAMESPACE
 class MainWindow:public DMainWindow
 {
@@ -16,6 +20,7 @@ public:
     void initConnection();
     void initData();
     MainWindow(QWidget *parent=nullptr);
+    ~MainWindow();
 public Q_SLOTS:
     void slotDownload(bool clicked);
     void slotShowImage(QNetworkReply *reply);
@@ -25,7 +30,11 @@ private:
     DFrame *showFrame=nullptr;
     DLabel *showLabel=nullptr;
     QNetworkAccessManager *manager=nullptr;
+    PictureItem *m_item=nullptr;
+    QPixmap *cur_pictrue;
+    QString address;
     QNetworkRequest request;
+    QByteArray data_bytes;
 };
 DWIDGET_END_NAMESPACE
 #endif // MAINWINDOW_H
