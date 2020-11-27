@@ -11,6 +11,11 @@
 #include <QGraphicsScene>
 #include <QGraphicsView>
 #include "pictureitem.h"
+#include <DApplication>
+#include <QCoreApplication>
+#include <QGuiApplication>
+#define dApp (static_cast<Application *>(QCoreApplication::instance()))
+
 DWIDGET_BEGIN_NAMESPACE
 class MainWindow:public DMainWindow
 {

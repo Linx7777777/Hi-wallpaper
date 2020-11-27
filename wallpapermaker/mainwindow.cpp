@@ -10,8 +10,8 @@
 #include <QDBusInterface>
 #include <QDBusReply>
 #include <QDBusPendingCall>
+#include <QScreen>
 DWIDGET_USE_NAMESPACE
-
 void MainWindow::initUI()
 {
     QVBoxLayout *mainlayout=new QVBoxLayout (this);
@@ -77,9 +77,15 @@ void MainWindow::initConnection()
           });
         QDBusInterface *interface = new QDBusInterface("com.deepin.daemon.Appearance", "/com/deepin/daemon/Appearance",
                                         "com.deepin.daemon.Appearance", QDBusConnection::sessionBus());
-        qInfo()<<interface->isValid();
-        QDBusMessage mess= interface->call("Set", "background",fileName);
-    qInfo()<<mess.errorMessage();
+        qInfo()<<interface->isValid()<<fileName;
+        auto mm=qApp->primaryScreen()->name();
+       QVariant value=QVariant::fromValue(QString("file://")+fileName);
+        QDBusMessage mess= interface->call(QStringLiteral("SetMonitorBackground"),mm,value);
+        qInfo()<<value<<mm;
+        qInfo()<<mess.errorMessage();
+//        QString comm = QString("gsettings set "
+//                               "com.deepin.wrap.gnome.desktop.background picture-uri %1").arg(fileName);
+//        QProcess::execute(comm);
     });
 }
 
